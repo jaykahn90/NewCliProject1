@@ -1,36 +1,34 @@
 import React from 'react';
 import {View, Text, Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const Stack = createBottomTabNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
+      <Tab.Navigator>
+        <Tab.Screen name="Login" component={Login} />
+        <Tab.Screen name="SignUp" component={SignUp} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 };
 
-const Home = () => {
+const Login = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 30}}>Home Screen</Text>
+    <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+      <Text style={{fontSize: 40}}>Login</Text>
     </View>
   );
 };
 
-const Login = props => {
+const SignUp = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 30}}>Login Screen</Text>
-      <Button
-        title="Go to homepage"
-        onPress={() => props.navigation.navigate('Home')}
-      />
+    <View style={{flex: 1, justifyContent: 'center', alignContent: 'center'}}>
+      <Text style={{fontSize: 40}}>SignUp</Text>
     </View>
   );
 };
