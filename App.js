@@ -1,37 +1,41 @@
-import React from 'react';
-import {View, Text, Button} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, {useEffect, useState} from 'react';
+import {View, Text, ScrollView} from 'react-native';
+import {get} from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
-const Stack = createNativeStackNavigator();
 const App = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-};
+  const [data, setData] = useState([]);
+  const getAPIData = async () => {
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+    let result = await fetch(url);
+    result = await result.json();
+    setData(result);
+  };
 
-const Home = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 30}}>Home Screen</Text>
-    </View>
-  );
-};
+  useEffect(() => {
+    getAPIData();
+  }, []);
 
-const Login = props => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text style={{fontSize: 30}}>Login Screen</Text>
-      <Button
-        title="Go to homepage"
-        onPress={() => props.navigation.navigate('Home')}
-      />
-    </View>
+    <ScrollView>
+      <Text style={{fontSize: 25, margin: 20}}>List with API Call</Text>
+      {data.length
+        ? data.map(item => (
+            <View
+              style={{
+                padding: 10,
+                borderBottomColor: '#ccc',
+                borderBottomWidth: 2,
+              }}>
+              <Text style={{fontSize: 20, backgroundColor: '#ddd'}}>
+                {' '}
+                ID: {item.id}
+              </Text>
+              <Text style={{fontSize: 20}}> Title: {item.title}</Text>
+              <Text style={{fontSize: 20}}> BODY: {item.body}</Text>
+            </View>
+          ))
+        : null}
+    </ScrollView>
   );
 };
 
