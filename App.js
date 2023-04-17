@@ -31,7 +31,7 @@ const App = () => {
       <Header />
       <ScrollView>
         {products.map(item => (
-          <Product item={item} />
+          <Product key={item.name} item={item} />
         ))}
       </ScrollView>
     </View>
