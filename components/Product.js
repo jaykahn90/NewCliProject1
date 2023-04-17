@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {addToCart} from './redux/action';
+import {addToCart, removeFromCart} from './redux/action';
 
 const Product = props => {
   const item = props.item;
@@ -15,7 +15,7 @@ const Product = props => {
   };
 
   const handleRemoveFromCart = item => {
-    console.warn(item);
+    dispatch(removeFromCart(item.name));
   };
 
   useEffect(() => {
