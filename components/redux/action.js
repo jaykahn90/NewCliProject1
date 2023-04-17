@@ -6,3 +6,10 @@ export function addToCart(item) {
     data: item,
   };
 }
+
+export function removeFromCart(item) {
+  return {
+    type: ADD_TO_CART,
+    data: item,
+  };
+}

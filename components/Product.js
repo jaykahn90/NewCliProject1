@@ -14,6 +14,10 @@ const Product = props => {
     dispatch(addToCart(item));
   };
 
+  const handleRemoveFromCart = item => {
+    console.warn(item);
+  };
+
   useEffect(() => {
     if (cartItems && cartItems.length) {
       cartItems.forEach(element => {
@@ -39,7 +43,7 @@ const Product = props => {
       {isAdded ? (
         <Button
           title="Remove from Cart"
-          onPress={() => handleAddToCart(item)}
+          onPress={() => handleRemoveFromCart(item)}
         />
       ) : (
         <Button title="Add to Cart" onPress={() => handleAddToCart(item)} />
